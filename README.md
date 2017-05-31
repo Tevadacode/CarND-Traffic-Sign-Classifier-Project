@@ -53,13 +53,13 @@ The goals / steps of this project are the following
 
 4. The code for training the model is located in from line to 
     To train the model, I used:
-    optimizer: AdamOptimizer
-    batch size: 512
-    number of epochs: 40
-    mu = 0
-    sigma = 0.1
+    * optimizer: AdamOptimizer
+    * batch size: 512
+    * number of epochs: 40
+    * mu = 0
+    * sigma = 0.1
 
-5. The code for calculating the accuracy of the model is located in ....
+5. The code for calculating the accuracy of the model is located in Traffic_Sign_Classifier.py from line 62 to 85.
     My final model results were:
     * training set accuracy of 97%
     * validation set accuracy of 94%
@@ -67,13 +67,11 @@ The goals / steps of this project are the following
 
 # Test the Model on a New Set of Images
 1. I downloaded 9 images from the web and I used pyplot to plot them as shown below:
-
     ![Traffic signs](./output_images/signs_from_web.png)
+
 2. Here are the results of the prediction:
-
     ![Prediction results](./output_images/signs_from_web_result.png)
-
-    The model was able to correctly guess 8 out of 9 traffic signs, which gave an accuracy of 83%.
+    The model was able to correctly guess 7 out of 9 traffic signs, which gave an accuracy of 77%.
     This compares favorably to the accuracy on the test set of 43.
 
 # Summary:
@@ -82,6 +80,6 @@ The goals / steps of this project are the following
     training data set. I am sure I can get a higher accuracy than 93% if I spent more time to augmented
     the training data set and fine tune the hyper-parameters. It surprised me that the model predict the
     20 km/h speed limit wrong. I am not really sure if the sign I got from the web is the German traffic
-    sign for 20 km/h . 
+    sign for 20 km/h. 
 
  
