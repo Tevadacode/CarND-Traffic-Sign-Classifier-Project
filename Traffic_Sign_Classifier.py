@@ -40,7 +40,7 @@ with open("./signnames.csv", 'r') as csvfile:
         k, v = row
         signnames[k] = v
 
-'''
+
 index = random.randint(0, n_train)
 image = X_train[index]
 plt.figure(figsize=(1,1))
@@ -91,3 +91,4 @@ with tf.Session() as sess:
     test_loss, test_acc = evaluate(X_test, y_test)
     print("Train Loss = {:.3f}".format(test_loss))
     print("Test Acc = {:.3f}".format(test_acc))
+'''

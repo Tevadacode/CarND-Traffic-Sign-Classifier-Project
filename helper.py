@@ -90,7 +90,6 @@ saved_file = './test.ckpt'
 
 def predict(sign):
     sess = tf.get_default_session()
-    print(sign.shape)
     prop = sess.run(logits, feed_dict={x:sign, keep_prob:1.0})
     result = tf.nn.softmax(prop)   
     index = sess.run(tf.argmax(result, 1))

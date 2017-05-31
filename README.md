@@ -1,54 +1,82 @@
-## Project: Build a Traffic Sign Recognition Program
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
-
-Overview
----
-In this project, you will use what you've learned about deep neural networks and convolutional neural networks to classify traffic signs. You will train and validate a model so it can classify traffic sign images using the [German Traffic Sign Dataset](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset). After the model is trained, you will then try out your model on images of German traffic signs that you find on the web.
-
-We have included an Ipython notebook that contains further instructions 
-and starter code. Be sure to download the [Ipython notebook](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb). 
-
-We also want you to create a detailed writeup of the project. Check out the [writeup template](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/writeup_template.md) for this project and use it as a starting point for creating your own writeup. The writeup can be either a markdown file or a pdf document.
-
-To meet specifications, the project will require submitting three files: 
-* the Ipython notebook with the code
-* the code exported as an html file
-* a writeup report either as a markdown or pdf file 
-
-Creating a Great Writeup
----
-A great writeup should include the [rubric points](https://review.udacity.com/#!/rubrics/481/view) as well as your description of how you addressed each point.  You should include a detailed description of the code used in each step (with line-number references and code snippets where necessary), and links to other supporting documents or external references.  You should include images in your writeup to demonstrate how your code works with examples.  
-
-All that said, please be concise!  We're not looking for you to write a book here, just a brief description of how you passed each rubric point, and references to the relevant code :). 
-
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup.
-
-The Project
----
-The goals / steps of this project are the following:
-* Load the data set
-* Explore, summarize and visualize the data set
+# Project: Build a Traffic Sign Recognition
+The goals / steps of this project are the following
+* Load the data set (see below for links to the project data set)
+* Explore, summarize and visualize the dataa set
 * Design, train and test a model architecture
 * Use the model to make predictions on new images
 * Analyze the softmax probabilities of the new images
 * Summarize the results with a written report
 
-### Dependencies
-This lab requires:
+# Data Set Summary & Exploration
+1. The code for this step is in Traffic_Sign_Classifier.py from line 1 to 29
+    I used pickle library to open binary files and python library to display the 
+    statistic of traffic sign data set:
+    * The size of the training set is 34799
+    * The size of the test set is 12630
+    * The shape of a traffic sign is (32, 32, 3)
+    * The number of unique classes / labels in the data set is 43
+2. The code for this step is in Traffic_Sign_Classifier.py from line 32 to 49
+    I used pyplot to plot a random image in the data set. Here is an example:
+    ![Speed Limit 80 km/h](./output_images/speed_limit80.png)
 
-* [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit)
+# Design and Test a Model Architecture
+1. Preprocessing Data Set
+The code for this step is in Traffic_Sign_Classifier.py from line 51 to 55.
+I normalized the data to -1 and 1 by using numpy.
 
-The lab environment can be created with CarND Term1 Starter Kit. Click [here](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) for the details.
+    ```python
+    X_train = np.subtract(np.divide(X_train, 127), 1)
+    ```
+2. I seperated training, validation, and test set to avoid overfitting. 
+   The validation set contains 4410 images and 12630 for test set.
+3. My final model consisted of the following layers:
+Layer | Description
+------|------------
+Input | 32x32x3 RGB images
+Conv 3x3 | strides: 1x1, padding: VALID, output: 28x28x6
+RELU |
+Max pooling | strides:2x2, output: 14x14x6
+Conv 3x3 | strides: 1x1, padding: VALID, output: 10x10x6
+RELU |
+Max pooling | strides:2x2, output: 5x5x16
+Flatten | output: 400
+Fully connected | output: 120
+RELU | 
+Dropout | probability: 0.5
+Fully connected | output: 84
+RELU |
+Dropout | probability: 0.5
+Fully connected | output: 43
 
-### Dataset and Repository
+4. The code for training the model is located in from line to 
+To train the model, I used:
+optimizer: AdamOptimizer
+batch size: 512
+number of epochs: 30
+mu = 0
+sigma = 0.1
 
-1. Download the data set. The classroom has a link to the data set in the "Project Instructions" content. This is a pickled dataset in which we've already resized the images to 32x32. It contains a training, validation and test set.
-2. Clone the project, which contains the Ipython notebook and the writeup template.
-```sh
-git clone https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project
-cd CarND-Traffic-Sign-Classifier-Project
-jupyter notebook Traffic_Sign_Classifier.ipynb
-```
+5. The code for calculating the accuracy of the model is located in ....
+My final model results were:
+* training set accuracy of 97%
+* validation set accuracy of 93%
+* test set accuracy of 92%
 
-### Requirements for Submission
-Follow the instructions in the `Traffic_Sign_Classifier.ipynb` notebook and write the project report using the writeup template as a guide, `writeup_template.md`. Submit the project code and writeup document.
+# Test the Model on a New Set of Images
+1. I downloaded 9 images from the web and I used pyplot to plot them as shown below:
+![Traffic signs](./output_images/signs_from_web.png)
+2. Here are the results of the prediction:
+![Prediction results](./output_images/signs_from_web_result.png)
+
+The model was able to correctly guess 8 out of 9 traffic signs, which gave an accuracy of 83%.
+This compares favorably to the accuracy on the test set of 43.
+
+Summary:
+It is a good starting point to use LeNet training model architecture for traffic sign recognition,
+but there are some more places to tune to get a better result. For example, I did not augmented the
+training data set. I am sure I can get a higher accuracy than 93% if I spent more time to augmented
+the training data set and fine tune the hyper-parameters. It surprised me that the model predict the
+20 km/h speed limit wrong. I am not really sure if the sign I got from the web is the German traffic
+sign for 20 km/h  
+
+ 

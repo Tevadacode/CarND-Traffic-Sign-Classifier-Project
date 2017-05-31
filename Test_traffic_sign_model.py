@@ -63,13 +63,12 @@ with tf.Session() as sess:
     '''
     my_tensor1 = sess.graph.get_tensor_by_name('conv1:0')
     my_tensor2 = sess.graph.get_tensor_by_name('conv2:0')
-    outputFeatureMap(images, my_tensor1)
+    outputFeatureMap(images, my_tensor1,activation_min=1)
     outputFeatureMap(images, my_tensor2)
     '''
     
 nrows = len(original_img)
 plt_number = 1
-
 
 for indImage in zip(index, original_img):    
     plt.subplot(3, 3, plt_number)
