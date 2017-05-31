@@ -2,7 +2,7 @@ import tensorflow as tf
 
 input_channels = 3
 mu = 0
-sigma = 0.095
+sigma = 0.1
 weights = [
     tf.Variable(tf.truncated_normal(shape=(5, 5, input_channels, 6), mean = mu, stddev = sigma), name='conv1_W'),
     tf.Variable(tf.truncated_normal(shape=(5, 5, 6, 16), mean = mu, stddev = sigma), name='conv2_W'),
